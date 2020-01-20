@@ -7,12 +7,20 @@ RSpec.describe UsersController, type: :controller do
       get :new
       expect(response).to have_http_status(:success)
     end
+
+    it 'sets a user variable' do
+      get :new
+      user = assigns(:user)
+      expect(user).not_to be_nil
+    end
   end
 
-  describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
+  describe "POST #create" do
+    context 'valid data' do
+      it "returns http redirect" do
+        post :create
+        expect(response).to have_http_status(:redirect)
+      end
     end
   end
 
