@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 group :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do
