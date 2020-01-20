@@ -15,7 +15,7 @@ user. This should work in Linux and Mac operative systems.
 ```shell
 git clone --single-branch --branch 'feature/private-events' \
 https://github.com/santiago-rodrig/private-events &&
-cd private-events && rails db:reset
+cd private-events && rails db:reset && rails db:migrate
 ```
 
 ## Test suite
