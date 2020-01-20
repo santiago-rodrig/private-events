@@ -47,7 +47,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'database-cleaner'
+  gem 'database_cleaner'
   gem 'rspec-rails'
 end
 
