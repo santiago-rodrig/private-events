@@ -3,26 +3,32 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
 
   describe "GET #new" do
-    it "returns http success" do
+    before do
       get :new
+    end
+
+    it "returns http success" do
       expect(response).to have_http_status(:success)
     end
 
     it 'sets a user variable' do
-      get :new
-      user = assigns(:user)
-      expect(user).not_to be_nil
+      expect(assigns(:user)).to be_a_new(User)
     end
   end
 
   describe "POST #create" do
     before do
       post :create, params: { user: { name: 'bob' } }
+      @user = assigns(:user)
     end
 
     context 'valid data' do
       it "returns http redirect" do
         expect(response).to have_http_status(:redirect)
+      end
+
+      it 'redirects to the user show page' do
+        expect(response).to redirect_to(user_url(@user))
       end
 
       it 'creates a new user' do
