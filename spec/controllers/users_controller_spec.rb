@@ -18,7 +18,7 @@ RSpec.describe UsersController, type: :controller do
   describe "POST #create" do
     context 'valid data' do
       it "returns http redirect" do
-        post :create
+        post :create, user: { name: 'bob' }
         expect(response).to have_http_status(:redirect)
       end
     end
