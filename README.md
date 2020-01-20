@@ -13,7 +13,8 @@ Copy and paste the following chain of commands in your terminal as a regular
 user. This should work in Linux and Mac operative systems.
 
 ```shell
-git clone --single-branch --branch 'feature/private-events' https://github.com/santiago-rodrig/private-events &&
+git clone --single-branch --branch 'feature/private-events' \
+https://github.com/santiago-rodrig/private-events &&
 cd private-events && rails db:reset
 ```
 
