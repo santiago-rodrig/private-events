@@ -1,24 +1,27 @@
-# README
+# Private events
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This repository is intended to be an associations practice using Rails,
+the instructions for this practice project can be found in
+[TOP site](https://www.theodinproject.com/courses/ruby-on-rails/lessons/associations).
 
-Things you may want to cover:
+In summary, this is the backend of an event's site that has users and events
+related in many ways.
 
-* Ruby version
+## Setup
 
-* System dependencies
+Copy and paste the following chain of commands in your terminal as a regular
+user. This should work in Linux and Mac operative systems.
 
-* Configuration
+```shell
+git clone --single-branch --branch 'feature/private-events' https://github.com/santiago-rodrig/private-events &&
+cd private-events && rails db:reset
+```
 
-* Database creation
+## Test suite
 
-* Database initialization
+To run the tests that verify the proper behavior of the Rails app, run the
+following command.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```shell
+rails spec
+```
