@@ -16,10 +16,19 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "POST #create" do
+    before do
+      post :create, params: { user: { name: 'bob' } }
+    end
+
     context 'valid data' do
       it "returns http redirect" do
-        post :create, params: { user: { name: 'bob' } }
         expect(response).to have_http_status(:redirect)
+      end
+
+      it 'creates a new user' do
+        count = User.count
+        post :create, params: { user: { name: 'gabriel' } }
+        expect(User.count).to eq(count + 1)
       end
     end
   end
@@ -27,11 +36,15 @@ RSpec.describe UsersController, type: :controller do
   describe "GET #show" do
     before do
       @user = User.create(name: 'lenny')
+      get :show, params: { id: @user.id }
     end
 
     it "returns http success" do
-      get :show, params: { id: @user.id }
       expect(response).to have_http_status(:success)
+    end
+
+    it 'sets the corresponding user' do
+      expect(assigns(:user)).to eq(@user)
     end
   end
 
