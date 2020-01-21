@@ -4,10 +4,13 @@ RSpec.describe "users/show.html.erb", type: :view do
   before do
     @user = User.create(name: 'bob')
     assign(:user, @user)
-    render
   end
 
   it 'displays the name of the user' do
+    assign(:attended_events, @user.attended_events)
+    assign(:past_attended_events, @user.past_attended_events)
+    assign(:upcoming_attended_events, @user.upcoming_attended_events)
+    render
     expect(rendered).to match(
       Regexp.new(
         ".*#{@user.name}.*",
@@ -17,11 +20,12 @@ RSpec.describe "users/show.html.erb", type: :view do
   end
 
   it 'displays a list of created events' do
-    @user = User.create(name: 'bob')
     @user.events.create(description: 'event 1')
     @user.events.create(description: 'event 2')
     @user.events.create(description: 'event 3')
-    assign(:user, @user)
+    assign(:attended_events, @user.attended_events)
+    assign(:past_attended_events, @user.past_attended_events)
+    assign(:upcoming_attended_events, @user.upcoming_attended_events)
     render
 
     @user.events.each do |event|
@@ -35,7 +39,6 @@ RSpec.describe "users/show.html.erb", type: :view do
   end
 
   it 'displays a list of attended events' do
-    @user = User.create(name: 'bob')
     @stu = User.create(name: 'stuart')
     @party_1 = @stu.events.create(description: 'party 1')
     @party_2 = @stu.events.create(description: 'party 2')
@@ -43,7 +46,9 @@ RSpec.describe "users/show.html.erb", type: :view do
     @user.attended_events << @party_1
     @user.attended_events << @party_2
     @user.attended_events << @party_3
-    assign(:user, @user)
+    assign(:attended_events, @user.attended_events)
+    assign(:past_attended_events, @user.past_attended_events)
+    assign(:upcoming_attended_events, @user.upcoming_attended_events)
     render
 
     @user.attended_events.each do |event|
@@ -58,7 +63,6 @@ RSpec.describe "users/show.html.erb", type: :view do
 
   it 'displays a list of past attended events' do
     now = Time.now
-    @user = User.create(name: 'bob')
     @stu = User.create(name: 'stuart')
 
     @party_1 = @stu.events.create(
@@ -76,7 +80,6 @@ RSpec.describe "users/show.html.erb", type: :view do
       date: Date.new(now.year, now.month, now.day - 1)
     )
 
-    assign(:user, @user)
     assign(:attended_events, @user.attended_events)
     assign(:past_attended_events, @user.past_attended_events)
     assign(:upcoming_attended_events, @user.upcoming_attended_events)
@@ -94,7 +97,6 @@ RSpec.describe "users/show.html.erb", type: :view do
 
   it 'displays a list of upcoming attended events' do
     now = Time.now
-    @user = User.create(name: 'bob')
     @stu = User.create(name: 'stuart')
 
     @party_1 = @stu.events.create(
@@ -115,7 +117,6 @@ RSpec.describe "users/show.html.erb", type: :view do
     @user.attended_events << @party_1
     @user.attended_events << @party_2
     @user.attended_events << @party_3
-    assign(:user, @user)
     assign(:attended_events, @user.attended_events)
     assign(:past_attended_events, @user.past_attended_events)
     assign(:upcoming_attended_events, @user.upcoming_attended_events)
@@ -136,6 +137,9 @@ RSpec.describe "users/show.html.erb", type: :view do
       @user = User.create(name: 'bob')
       controller.session[:user_id] = @user.id
       assign(:user, @user)
+      assign(:attended_events, @user.attended_events)
+      assign(:past_attended_events, @user.past_attended_events)
+      assign(:upcoming_attended_events, @user.upcoming_attended_events)
       render template: 'users/new', layout: 'layouts/application'
     end
 
