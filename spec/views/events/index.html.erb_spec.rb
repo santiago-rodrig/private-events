@@ -2,17 +2,21 @@ require 'rails_helper'
 
 RSpec.describe 'events/index.html.erb', type: :view do
   before do
-    Event.create([
+    @jen = User.create(name: 'jen')
+
+    @jen.events.create([
       { name: 'party', date: (Time.now + 3600).to_date },
       { name: 'beach party', date: (Time.now + 7200).to_date },
       { name: 'birthday party', date: (Time.now + 10800).to_date }
     ])
 
+    @events = Event.all
+    assign(:events, @event)
     render
   end
 
   it 'displays all the event names' do
-    Event.all.each do |event|
+    @events.each do |event|
       expect(rendered).to match(
         Regexp.new(
           ".*#{event.name}.*",
