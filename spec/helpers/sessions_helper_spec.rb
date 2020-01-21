@@ -25,4 +25,15 @@ RSpec.describe SessionsHelper, type: :helper do
       expect(helper.logged_in?).to be_falsy
     end
   end
+
+  describe '#current_user' do
+    it 'returns the user logged in' do
+      controller.session[:user_id] = @user.id
+      expect(helper.current_user).to eq(@user)
+    end
+
+    it 'returns nil if there is no user logged in' do
+      expect(helper.current_user).to be_nil
+    end
+  end
 end
