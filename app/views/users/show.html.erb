@@ -1,11 +1,13 @@
 <h1><%= @user.name %></h1>
 
+<h2>All created events</h2>
 <ul>
   <% @user.events.each do |event| %>
     <li><%= event.description %></li>
   <% end %>
 </ul>
 
+<h2>All attended events</h2>
 <ul>
   <%= @user.attended_events.each do |event| %>
     <li><%= event.description %></li>

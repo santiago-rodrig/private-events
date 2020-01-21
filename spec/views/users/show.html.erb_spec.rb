@@ -71,14 +71,11 @@ RSpec.describe "users/show.html.erb", type: :view do
       date: Date.new(now.year, now.month, now.day - 3)
     )
 
-    @party_1 = @stu.events.create(
+    @party_3 = @stu.events.create(
       description: 'party 1',
       date: Date.new(now.year, now.month, now.day - 1)
     )
 
-    @user.attended_events << @party_1
-    @user.attended_events << @party_2
-    @user.attended_events << @party_3
     assign(:user, @user)
     assign(:attended_events, @user.attended_events)
     assign(:past_attended_events, @user.past_attended_events)
@@ -88,7 +85,7 @@ RSpec.describe "users/show.html.erb", type: :view do
     @user.past_attended_events.each do |event|
       expect(rendered).to match(
         Regexp.new(
-          ".*#{event.description}.*",
+          ".*<h2>Past attended events</h2>.*#{event.description}.*",
           1 | 4
         )
       )
@@ -110,7 +107,7 @@ RSpec.describe "users/show.html.erb", type: :view do
       date: Date.new(now.year, now.month, now.day + 3)
     )
 
-    @party_1 = @stu.events.create(
+    @party_3 = @stu.events.create(
       description: 'party 1',
       date: Date.new(now.year, now.month, now.day + 1)
     )
@@ -127,7 +124,7 @@ RSpec.describe "users/show.html.erb", type: :view do
     @user.upcoming_attended_events.each do |event|
       expect(rendered).to match(
         Regexp.new(
-          ".*#{event.description}.*",
+          ".*<h2>Upcoming events to attend</h2>.*#{event.description}.*",
           1 | 4
         )
       )
