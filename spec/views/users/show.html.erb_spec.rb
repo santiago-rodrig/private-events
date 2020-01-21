@@ -21,8 +21,8 @@ RSpec.describe "users/show.html.erb", type: :view do
     @user.events.create(name: 'event 1', date: (Time.now + 3600).to_date)
     @user.events.create(name: 'event 2', date: (Time.now + 3600).to_date)
     @user.events.create(name: 'event 3', date: (Time.now + 3600).to_date)
+    assign(:user, @user)
     render
-
     @user.events.each do |event|
       expect(rendered).to match(
         Regexp.new(
