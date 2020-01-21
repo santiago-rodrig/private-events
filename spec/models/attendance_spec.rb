@@ -1,5 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Attendance, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @user = User.create(name: 'bob')
+    @event = Event.create(description: 'hugue party')
+    @attendance = Attendance.create(attendee_id: @user.id, attended_event_id: @event.id)
+  end
+
+  it 'belongs to a an attendee' do
+    expect(@attendance).to be_respond_to(:attendee)
+    expect(@attendance.attendee).to eq(@user)
+  end
+
+  it 'belongs to an attended_event' do
+    expect(@attendance).to be_respond_yo(:attended_event)
+    expect(@attendance.attended_event).to eq(@event)
+  end
 end
