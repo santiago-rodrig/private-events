@@ -23,5 +23,14 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe 'DELETE #logout' do
+    before do
+      @user = User.create(name: 'bob')
+      post :login, params: { name: 'bob' }
+      delete :logout
+    end
+
+    it 'clears the session[:user_id]' do
+      expect(controller.session[:user_id]).to be_nil
+    end
   end
 end
