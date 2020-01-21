@@ -1,0 +1,7 @@
+<%= form_for(@event) do |f| %>
+  <div><%= f.label :name %></div>
+  <div><%= f.text_field :name %></div>
+  <div><%= f.label :date %></div>
+  <div><%= f.date_field :date %></div>
+  <%= f.submit %>
+<% end %>
