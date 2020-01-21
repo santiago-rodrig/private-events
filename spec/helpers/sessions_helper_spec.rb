@@ -11,5 +11,18 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe SessionsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @user = User.create(name: 'bob')
+  end
+
+  describe '#logged_in?' do
+    it 'returns true if there is a user logged in' do
+      controller.session[:user_id] = @user.id
+      expect(helper.logged_in?).to be_truthy
+    end
+
+    it 'returns false if there is not a user logged in' do
+      expect(helper.logged_in?).to be_falsy
+    end
+  end
 end
