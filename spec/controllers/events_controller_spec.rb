@@ -31,7 +31,7 @@ RSpec.describe EventsController, type: :controller do
       get :index
     end
 
-    it 'sets the evens variable to all events' do
+    it 'sets the events variable to all events' do
       expect(assigns(:events)).to eq(Event.all)
     end
 
