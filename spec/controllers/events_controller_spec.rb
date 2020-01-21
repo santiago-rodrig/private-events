@@ -31,4 +31,7 @@ RSpec.describe EventsController, type: :controller do
 
   describe 'POST #create' do
   end
+
+  describe 'GET #new' do
+  end
 end
