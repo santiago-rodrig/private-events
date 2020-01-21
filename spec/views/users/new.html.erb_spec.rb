@@ -1,11 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe "users/new.html.erb", type: :view do
+  before do
+    assign(:user, User.new)
+  end
+
   it 'renders a form with the right action' do
     render
     expect(rendered).to match(
       Regexp.new(
-        '.*<form.*action=/users.*',
+        '.*<form.*action="/users".*',
         1 | 4
       )
     )
@@ -15,7 +19,7 @@ RSpec.describe "users/new.html.erb", type: :view do
     render
     expect(rendered).to match(
       Regexp.new(
-        '.*<form.*>.*<input.*type=\'text\'.*',
+        '.*<form.*>.*<input.*type="text".*',
         1 | 4
       )
     )
@@ -25,7 +29,7 @@ RSpec.describe "users/new.html.erb", type: :view do
     render
     expect(rendered).to match(
       Regexp.new(
-        '.*<form.*>.*<input.*type=\'submit\'.*',
+        '.*<form.*>.*<input.*type="submit".*',
         1 | 4
       )
     )
