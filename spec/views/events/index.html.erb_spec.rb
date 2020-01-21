@@ -11,7 +11,7 @@ RSpec.describe 'events/index.html.erb', type: :view do
     ])
 
     @events = Event.all
-    assign(:events, @event)
+    assign(:events, @events)
     render
   end
 
