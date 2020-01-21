@@ -11,7 +11,7 @@ RSpec.describe Event, type: :model do
     )
 
     expect(event.respond_to?(:user)).to be_truthy
-    expect(event.user).to eq(@user)
+    expect(event.creator).to eq(@user)
   end
 
   it 'creates a new event successfully' do
