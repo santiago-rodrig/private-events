@@ -10,4 +10,8 @@ class SessionsController < ApplicationController
       render :new
     end
   end
+
+  def logout
+    session.delete(:user_id)
+  end
 end
