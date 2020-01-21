@@ -18,15 +18,16 @@ RSpec.describe "users/show.html.erb", type: :view do
 
   it 'displays a list of created events' do
     @user = User.create(name: 'bob')
-    @user.events.create(name: 'event 1', date: (Time.now + 3600).to_date)
-    @user.events.create(name: 'event 2', date: (Time.now + 3600).to_date)
-    @user.events.create(name: 'event 3', date: (Time.now + 3600).to_date)
+    @user.events.create(description: 'event 1')
+    @user.events.create(description: 'event 2')
+    @user.events.create(description: 'event 3')
     assign(:user, @user)
     render
+
     @user.events.each do |event|
       expect(rendered).to match(
         Regexp.new(
-          ".*#{event.name}.*",
+          ".*#{event.description}.*",
           1 | 4
         )
       )

@@ -5,9 +5,9 @@ RSpec.describe 'events/index.html.erb', type: :view do
     @jen = User.create(name: 'jen')
 
     @jen.events.create([
-      { name: 'party' },
-      { name: 'beach party' },
-      { name: 'birthday party' }
+      { description: 'party' },
+      { description: 'beach party' },
+      { description: 'birthday party' }
     ])
 
     @events = Event.all

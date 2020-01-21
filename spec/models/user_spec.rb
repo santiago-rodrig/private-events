@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
     user = User.create(name: 'jen')
 
     event = Event.create(
-      name: 'party', date: (Time.now + 3600).to_date, user_id: user.id
+      description: 'party', user_id: user.id
     )
 
     expect(user.respond_to?(:events)).to be_truthy

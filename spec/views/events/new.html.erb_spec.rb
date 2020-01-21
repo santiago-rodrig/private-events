@@ -16,19 +16,10 @@ RSpec.describe 'events/new.html.erb', type: :view do
     )
   end
 
-  it 'displays a text input field for the event name' do
+  it 'displays a text area field for the event description' do
     expect(rendered).to match(
       Regexp.new(
-        '.*<form.*>.*<input.*type="text".*>.*</form>.*',
-        1 | 4
-      )
-    )
-  end
-
-  it 'displays a date field for the event date' do
-    expect(rendered).to match(
-      Regexp.new(
-        '.*<form.*>.*<input.*type="date".*>.*</form>.*',
+        '.*<form.*>.*<textarea.*>.*</textarea>.*</form>.*',
         1 | 4
       )
     )
