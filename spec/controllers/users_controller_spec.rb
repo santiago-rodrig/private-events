@@ -22,20 +22,18 @@ RSpec.describe UsersController, type: :controller do
       @user = assigns(:user)
     end
 
-    context 'valid data' do
-      it "returns http redirect" do
-        expect(response).to have_http_status(:redirect)
-      end
+    it "returns http redirect" do
+      expect(response).to have_http_status(:redirect)
+    end
 
-      it 'redirects to the user show page' do
-        expect(response).to redirect_to(user_url(@user))
-      end
+    it 'redirects to the user show page' do
+      expect(response).to redirect_to(user_url(@user))
+    end
 
-      it 'creates a new user' do
-        count = User.count
-        post :create, params: { user: { name: 'gabriel' } }
-        expect(User.count).to eq(count + 1)
-      end
+    it 'creates a new user' do
+      count = User.count
+      post :create, params: { user: { name: 'gabriel' } }
+      expect(User.count).to eq(count + 1)
     end
   end
 
