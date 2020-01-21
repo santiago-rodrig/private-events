@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Attendance, type: :model do
   before do
     @user = User.create(name: 'bob')
-    @event = Event.create(description: 'hugue party')
+    @event = @user.events.create(description: 'hugue party')
     @attendance = Attendance.create(attendee_id: @user.id, attended_event_id: @event.id)
   end
 
@@ -13,7 +13,7 @@ RSpec.describe Attendance, type: :model do
   end
 
   it 'belongs to an attended_event' do
-    expect(@attendance).to be_respond_yo(:attended_event)
+    expect(@attendance).to be_respond_to(:attended_event)
     expect(@attendance.attended_event).to eq(@event)
   end
 end
