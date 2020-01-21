@@ -85,5 +85,20 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe 'GET #new' do
+    before do
+      get :new
+    end
+
+    it 'sets a new event variable' do
+      expect(assigns(:event)).to be_a_new(Event)
+    end
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'renders the correct template' do
+      expect(response).to render_template(:new)
+    end
   end
 end
