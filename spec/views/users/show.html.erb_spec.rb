@@ -56,6 +56,84 @@ RSpec.describe "users/show.html.erb", type: :view do
     end
   end
 
+  it 'displays a list of past attended events' do
+    now = Time.now
+    @user = User.create(name: 'bob')
+    @stu = User.create(name: 'stuart')
+
+    @party_1 = @stu.events.create(
+      description: 'party 1',
+      date: Date.new(now.year, now.month, now.day + 2)
+    )
+
+    @party_2 = @stu.events.create(
+      description: 'party 2',
+      date: Date.new(now.year, now.month, now.day - 3)
+    )
+
+    @party_1 = @stu.events.create(
+      description: 'party 1',
+      date: Date.new(now.year, now.month, now.day - 1)
+    )
+
+    @user.attended_events << @party_1
+    @user.attended_events << @party_2
+    @user.attended_events << @party_3
+    assign(:user, @user)
+    assign(:attended_events, @user.attended_events)
+    assign(:past_attended_events, @user.past_attended_events)
+    assign(:upcoming_attended_events, @user.upcoming_attended_events)
+    render
+
+    @user.past_attended_events.each do |event|
+      expect(rendered).to match(
+        Regexp.new(
+          ".*#{event.description}.*",
+          1 | 4
+        )
+      )
+    end
+  end
+
+  it 'displays a list of upcoming attended events' do
+    now = Time.now
+    @user = User.create(name: 'bob')
+    @stu = User.create(name: 'stuart')
+
+    @party_1 = @stu.events.create(
+      description: 'party 1',
+      date: Date.new(now.year, now.month, now.day - 2)
+    )
+
+    @party_2 = @stu.events.create(
+      description: 'party 2',
+      date: Date.new(now.year, now.month, now.day + 3)
+    )
+
+    @party_1 = @stu.events.create(
+      description: 'party 1',
+      date: Date.new(now.year, now.month, now.day + 1)
+    )
+
+    @user.attended_events << @party_1
+    @user.attended_events << @party_2
+    @user.attended_events << @party_3
+    assign(:user, @user)
+    assign(:attended_events, @user.attended_events)
+    assign(:past_attended_events, @user.past_attended_events)
+    assign(:upcoming_attended_events, @user.upcoming_attended_events)
+    render
+
+    @user.upcoming_attended_events.each do |event|
+      expect(rendered).to match(
+        Regexp.new(
+          ".*#{event.description}.*",
+          1 | 4
+        )
+      )
+    end
+  end
+
   context 'the user is signed in' do
     before do
       @user = User.create(name: 'bob')
