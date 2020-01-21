@@ -42,6 +42,10 @@ RSpec.describe EventsController, type: :controller do
     it 'renders the correct template' do
       expect(response).to render_template(:index)
     end
+
+    it 'displays the three events' do
+      expect(assigns(:events).count).to eq(3)
+    end
   end
 
   describe 'POST #create' do
