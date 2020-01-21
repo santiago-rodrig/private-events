@@ -12,6 +12,14 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe 'POST #login' do
+    before do
+      @user = User.create(name: 'bob')
+      post :login, params: { name: 'bob' }
+    end
+
+    it 'sets the session[:user_id]' do
+      expect(controller.session[:user_id]).to eq(@user.id)
+    end
   end
 
   describe 'DELETE #logout' do
