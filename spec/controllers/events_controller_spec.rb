@@ -31,6 +31,14 @@ RSpec.describe EventsController, type: :controller do
       get :index
       expect(assigns(:events)).to eq(Event.all)
     end
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'renders the correct template' do
+      expect(response).to render_template(:index)
+    end
   end
 
   describe 'POST #create' do
