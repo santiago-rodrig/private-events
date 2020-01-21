@@ -33,6 +33,14 @@ RSpec.describe "events/show.html.erb", type: :view do
   end
 
   it 'displays a list of attendees' do
+    @attendees.each do |attendee|
+      expect(rendered).to match(
+        Regexp.new(
+          ".*#{attendee.name}.*",
+          1 | 4
+        )
+      )
+    end
   end
 
   context 'user logged in' do
