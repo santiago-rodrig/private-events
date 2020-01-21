@@ -3,8 +3,14 @@ require 'rails_helper'
 RSpec.describe "events/show.html.erb", type: :view do
   before do
     @user = User.create(name: 'bob')
+    @stu = User.create(name: 'stu')
+    @jen = User.create(name: 'jen')
     @event = @user.events.create(description: 'party')
+    @event.attendees << @stu
+    @event.attendees << @jen
+    @attendees = @event.attendees
     assign(:event, @event)
+    assign(:attendees, @attendees)
     render
   end
 
@@ -24,6 +30,9 @@ RSpec.describe "events/show.html.erb", type: :view do
         1 | 4
       )
     )
+  end
+
+  it 'displays a list of attendees' do
   end
 
   context 'user logged in' do

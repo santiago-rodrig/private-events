@@ -24,6 +24,10 @@ RSpec.describe EventsController, type: :controller do
     it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
+
+    it 'sets an attendees variable' do
+      expect(assigns(:attendees)).to eq(@event.attendees)
+    end
   end
 
   describe 'GET #index' do
