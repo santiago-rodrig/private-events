@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe EventsController, type: :controller do
   before do
     @user = User.create(name: 'bob')
-    @event = @user.events.create(name: 'party', date: (Time.now + 3600).to_date)
-    @user.events.create(name: 'beach party', date: (Time.now + 3600).to_date)
-    @user.events.create(name: 'birthday party', date: (Time.now + 3600).to_date)
+    @event = @user.events.create(description: 'party')
+    @user.events.create(description: 'beach party')
+    @user.events.create(description: 'birthday party')
   end
 
   describe 'GET #show' do
@@ -56,7 +56,7 @@ RSpec.describe EventsController, type: :controller do
       post(
         :create,
         params: {
-          event: { name: 'party', date: (Time.now + 3600).to_date }
+          event: { description: 'party' }
         }
       )
     end
@@ -67,7 +67,7 @@ RSpec.describe EventsController, type: :controller do
       post(
         :create,
         params: {
-          event: { name: 'beach party', date: (Time.now + 3600).to_date }
+          event: { description: 'beach party' }
         }
       )
 

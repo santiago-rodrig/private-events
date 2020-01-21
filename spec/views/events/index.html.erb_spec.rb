@@ -5,9 +5,9 @@ RSpec.describe 'events/index.html.erb', type: :view do
     @jen = User.create(name: 'jen')
 
     @jen.events.create([
-      { name: 'party', date: (Time.now + 3600).to_date },
-      { name: 'beach party', date: (Time.now + 7200).to_date },
-      { name: 'birthday party', date: (Time.now + 10800).to_date }
+      { name: 'party' },
+      { name: 'beach party' },
+      { name: 'birthday party' }
     ])
 
     @events = Event.all
@@ -19,7 +19,7 @@ RSpec.describe 'events/index.html.erb', type: :view do
     @events.each do |event|
       expect(rendered).to match(
         Regexp.new(
-          ".*#{event.name}.*",
+          ".*#{event.description}.*",
           1 | 4
         )
       )

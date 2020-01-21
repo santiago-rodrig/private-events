@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "events/show.html.erb", type: :view do
   before do
     @user = User.create(name: 'bob')
-    @event = @user.events.create(name: 'party', date: (Time.now + 3600).to_date)
+    @event = @user.events.create(description: 'party')
     assign(:event, @event)
     render
   end
@@ -11,7 +11,7 @@ RSpec.describe "events/show.html.erb", type: :view do
   it 'displays the name of the event' do
     expect(rendered).to match(
       Regexp.new(
-        ".*#{@event.name}.*",
+        ".*#{@event.description}.*",
         1 | 4
       )
     )
@@ -20,7 +20,7 @@ RSpec.describe "events/show.html.erb", type: :view do
   it 'displays the date of the event' do
     expect(rendered).to match(
       Regexp.new(
-        ".*#{@event.date}.*",
+        ".*#{@event.description}.*",
         1 | 4
       )
     )
