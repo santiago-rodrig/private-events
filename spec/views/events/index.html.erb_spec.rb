@@ -16,7 +16,7 @@ RSpec.describe 'events/index.html.erb', type: :view do
     @future_events = Event.future
     assign(:events, @events)
     assign(:past_events, @past_events)
-    assign(:past_events, @future_events)
+    assign(:future_events, @future_events)
     render
   end
 
@@ -43,7 +43,7 @@ RSpec.describe 'events/index.html.erb', type: :view do
   end
 
   it 'displays a list of future events' do
-    @past_events.each do |event|
+    @future_events.each do |event|
       expect(rendered).to match(
         Regexp.new(
           ".*<h2>Future events</h2>.*#{event.description}.*",
