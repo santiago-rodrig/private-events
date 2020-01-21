@@ -30,4 +30,58 @@ RSpec.describe User, type: :model do
     @user.attended_events << event
     expect(@user.attended_events).to include(event)
   end
+
+  it 'has past_attended_events' do
+    now = Time.now.to_date
+    user = User.create(name: 'crystal')
+
+    event_1 = user.events.create(
+      description: 'small meeting',
+      date: Date.new(now.year, now.month, now.day - 2)
+    )
+
+    event_2 = user.events.create(
+      description: 'family meeting',
+      date: Date.new(now.year, now.month, now.day - 6)
+    )
+
+    event_3 = user.events.create(
+      description: 'soccer game',
+      date: Date.new(now.year, now.month, now.day + 1)
+    )
+
+    events = [event_1, event_2, event_3]
+    events.each { |e| @user.attended_events << e }
+    old_events = @user.attended_events.where('date < ?', Time.now.to_date)
+    expect(@user.respond_to?(:past_attended_events)).to be_truthy
+    expect(@user.past_attended_events).to eq(old_events)
+    expect(@user.past_attended_events.count).to eq(2)
+  end
+
+  it 'has upcoming_attended_events' do
+    now = Time.now.to_date
+    user = User.create(name: 'crystal')
+
+    event_1 = user.events.create(
+      description: 'small meeting',
+      date: Date.new(now.year, now.month, now.day + 2)
+    )
+
+    event_2 = user.events.create(
+      description: 'family meeting',
+      date: Date.new(now.year, now.month, now.day + 6)
+    )
+
+    event_3 = user.events.create(
+      description: 'soccer game',
+      date: Date.new(now.year, now.month, now.day - 1)
+    )
+
+    events = [event_1, event_2, event_3]
+    events.each { |e| @user.attended_events << e }
+    upcoming_events = @user.attended_events.where('date >= ?', Time.now.to_date)
+    expect(@user.respond_to?(:past_attended_events)).to be_truthy
+    expect(@user.upcoming_attended_events).to eq(upcoming_events)
+    expect(@user.upcoming_attended_events.count).to eq(2)
+  end
 end
