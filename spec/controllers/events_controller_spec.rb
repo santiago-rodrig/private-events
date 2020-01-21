@@ -49,6 +49,39 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe 'POST #create' do
+    before do
+      @user = User.create(name: 'bob')
+      controller.session[:user_id] = @user.id
+
+      post(
+        :create,
+        params: {
+          event: { name: 'party', date: (Time.now + 3600).to_date }
+        }
+      )
+    end
+
+    it 'creates a new event' do
+      count = Event.count
+
+      post(
+        :create,
+        params: {
+          event: { name: 'beach party', date: (Time.now + 3600).to_date }
+        }
+      )
+
+      expect(Event.count).to eq(count + 1)
+    end
+
+    it 'belongs to the current user' do
+      event = Event.last
+      expect(event.creator).to eq(@user)
+    end
+
+    it 'returns http redirect' do
+      expect(response).to have_http_status(:redirect)
+    end
   end
 
   describe 'GET #new' do
