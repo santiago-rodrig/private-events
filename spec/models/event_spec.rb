@@ -20,4 +20,24 @@ RSpec.describe Event, type: :model do
     Event.create(description: 'event', user_id: @user.id)
     expect(Event.count).to eq(count + 1)
   end
+
+  it 'has a past method' do
+    expect(Event.respond_to?(:past)).to be_truthy
+  end
+
+  describe '::past' do
+    it 'returns all the past events' do
+      expect(Event.past).to eq(Event.where('date < ?', Time.now.to_date))
+    end
+  end
+
+  it 'has a future method' do
+    expect(Event.respond_to?(:future)).to be_truthy
+  end
+
+  describe '::future' do
+    it 'returns all the future events' do
+      expect(Event.future).to eq(Event.where('date > ?', Time.now.to_date))
+    end
+  end
 end
