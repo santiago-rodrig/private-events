@@ -34,6 +34,28 @@ RSpec.describe "users/show.html.erb", type: :view do
     end
   end
 
+  it 'displays a list of attended events' do
+    @user = User.create(name: 'bob')
+    @stu = User.create(name: 'stuart')
+    @party_1 = @stu.events.create(description: 'party 1')
+    @party_2 = @stu.events.create(description: 'party 2')
+    @party_3 = @stu.events.create(description: 'party 3')
+    @user.attended_events << @party_1
+    @user.attended_events << @party_2
+    @user.attended_events << @party_3
+    assign(:user, @user)
+    render
+
+    @user.attended_events.each do |event|
+      expect(rendered).to match(
+        Regexp.new(
+          ".*#{event.description}.*",
+          1 | 4
+        )
+      )
+    end
+  end
+
   context 'the user is signed in' do
     before do
       @user = User.create(name: 'bob')
