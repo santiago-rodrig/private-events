@@ -10,6 +10,9 @@
 
   <body>
     <header>
+      <% if current_user %>
+        <%= current_user.name %>
+      <% end %>
     </header>
     <%= yield %>
   </body>

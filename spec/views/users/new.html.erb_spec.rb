@@ -40,7 +40,7 @@ RSpec.describe "users/new.html.erb", type: :view do
       @user = User.create(name: 'bob')
       controller.session[:user_id] = @user.id
       assign(:user, @user)
-      render
+      render template: 'users/new', layout: 'layouts/application'
     end
 
     it 'displays the name of the user at the top' do
