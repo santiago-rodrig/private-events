@@ -50,6 +50,16 @@ RSpec.describe EventsController, type: :controller do
     it 'displays the three events' do
       expect(assigns(:events).count).to eq(3)
     end
+
+    it 'sets the past_events variable' do
+      expect(assigns(:past_events)).not_to be_nil
+      expect(assigns(:past_events)).to eq(Event.past)
+    end
+
+    it 'sets the future_events variable' do
+      expect(assigns(:future_events)).not_to be_nil
+      expect(assigns(:future_events)).to eq(Event.future)
+    end
   end
 
   describe 'POST #create' do
