@@ -10,7 +10,7 @@ RSpec.describe Event, type: :model do
       name: 'event', date: (Time.now + 3600).to_date, user_id: @user.id
     )
 
-    expect(event.respond_to(:user))
+    expect(event.respond_to?(:user))
     expect(event.user).to eq(@user)
   end
 
