@@ -51,8 +51,16 @@ RSpec.describe UsersController, type: :controller do
       expect(assigns(:user)).to eq(@user)
     end
 
-    it 'sets a attended_events variable' do
+    it 'sets attended_events variable' do
       expect(assigns(:attended_events)).to eq(@user.attended_events)
+    end
+
+    it 'sets upcoming_attended_events variable' do
+      expect(assigns(:upcoming_attended_events)).to eq(@user.upcoming_attended_events)
+    end
+
+    it 'sets past_attended_events variable' do
+      expect(assigns(:past_attended_events)).to eq(@user.past_attended_events)
     end
   end
 
