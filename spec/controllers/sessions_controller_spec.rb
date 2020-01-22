@@ -20,6 +20,14 @@ RSpec.describe SessionsController, type: :controller do
     it 'sets the session[:user_id]' do
       expect(controller.session[:user_id]).to eq(@user.id)
     end
+
+    it 'returns http redirect' do
+      expect(response).to have_http_status(:redirect)
+    end
+
+    it 'redirects to root' do
+      expect(response).to redirect_to(root_url)
+    end
   end
 
   describe 'DELETE #logout' do
@@ -31,6 +39,14 @@ RSpec.describe SessionsController, type: :controller do
 
     it 'clears the session[:user_id]' do
       expect(controller.session[:user_id]).to be_nil
+    end
+
+    it 'returns http redirect' do
+      expect(response).to have_http_status(:redirect)
+    end
+
+    it 'redirects to root' do
+      expect(response).to redirect_to(root_url)
     end
   end
 end

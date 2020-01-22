@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(name: params[:name])
 
     if @user
+      redirect_to root_url
       session[:user_id] = @user.id
     else
       render :new
@@ -13,5 +14,6 @@ class SessionsController < ApplicationController
 
   def logout
     session.delete(:user_id)
+    redirect_to root_url
   end
 end
