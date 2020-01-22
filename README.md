@@ -33,8 +33,16 @@ rails db:migrate RAILS_ENV=test
 ## Test suite
 
 To run the tests that verify the proper behavior of the Rails app, run the
-following command.
+following command. There are about **82 passing specs**, this should make you
+stop worrying about a malfunction in the app.
 
 ```shell
 rspec
 ```
+
+## Launching
+
+Just run `rails server`. Then visit [localhost:3000](http://localhost:3000/).
+If for some reason you have a server running in that same port just change
+the port with `rails server -p XXXX`, where `XXXX` is any number, it could
+be for example `3001`.
