@@ -3,27 +3,27 @@
 <h2>All created events</h2>
 <ul>
   <% @user.events.each do |event| %>
-    <li><%= event.description %></li>
+    <li><%= event.description %> | <%= link_to 'Show', event_path(event) %></li>
   <% end %>
 </ul>
 
 <h2>All attended events</h2>
 <ul>
   <% @attended_events.each do |event| %>
-    <li><%= event.description %></li>
+    <li><%= event.description %> | <%= link_to 'Show', event_path(event) %></li>
   <% end %>
 </ul>
 
 <h2>Past attended events</h2>
 <ul>
   <% @past_attended_events.each do |event| %>
-    <li><%= event.description %></li>
+    <li><%= event.description %> | <%= link_to 'Show', event_path(event) %></li>
   <% end %>
 </ul>
 
 <h2>Upcoming events to attend</h2>
 <ul>
   <% @upcoming_attended_events.each do |event| %>
-    <li><%= event.description %></li>
+    <li><%= event.description %> | <%= link_to 'Show', event_path(event) %></li>
   <% end %>
 </ul>

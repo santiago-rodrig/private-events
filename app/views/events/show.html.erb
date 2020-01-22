@@ -1,11 +1,15 @@
-<h1><%= @event.description %></h1>
+<h2>Description</h2>
+<p><%= @event.description %></p>
 
+<h2>Creator</h2>
 <p>
 <strong>creator</strong>: <%= @event.creator.name %>
+<%= link_to 'Show', user_path(@event.creator) %>
 </p>
 
+<h2>Attendees</h2>
 <ul>
   <% @attendees.each do |attendee| %>
-    <li><%= attendee.name %></li>
+    <li><%= attendee.name %> | <%= link_to 'Show', user_path(attendee) %></li>
   <% end %>
 </ul>

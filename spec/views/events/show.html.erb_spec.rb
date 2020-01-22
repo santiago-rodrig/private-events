@@ -26,7 +26,7 @@ RSpec.describe "events/show.html.erb", type: :view do
   it 'displays the creator of the event' do
     expect(rendered).to match(
       Regexp.new(
-        ".*<h2>Creator</h2>.*#{@event.creator.name}.*<a.*href=\"#{event_path(event)}\".*>Show</a>.*",
+        ".*<h2>Creator</h2>.*#{@event.creator.name}.*<a.*href=\"#{user_path(@event.creator)}\".*>Show</a>.*",
         1 | 4
       )
     )
