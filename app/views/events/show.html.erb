@@ -16,3 +16,13 @@
     <li><%= attendee.name %> | <%= link_to 'Show', user_path(attendee) %></li>
   <% end %>
 </ul>
+
+<% if current_user && current_user == @event.creator %>
+  <%= form_tag(invite_user_path(@event.creator)) do %>
+    <%= hidden_field_tag :event_id, "#{@event.id}" %>
+    <%= fields_for :invitation do |f| %>
+      <div><%= label_tag :users, 'Users to invite' %></div>
+      <div><%= text_field_tag :users, '', placeholder: 'jen, bob, stuart' %></div>
+    <% end %>
+  <% end %>
+<% end %>

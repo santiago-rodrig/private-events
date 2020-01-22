@@ -53,22 +53,72 @@ RSpec.describe 'events/show.html.erb', type: :view do
   end
 
   context 'invitations' do
-    it 'displays a form pointing to users/:id/invite' do
-      expect(rendered).to match(
-        Regexp.new(
-          ".*<form.*action=\"#{invite_user_path(@event.user)}\".*>.*</form>",
-          1 | 4
+    context 'logged user is owner of the event' do
+      before do
+        controller.session[:user_id] = @user.id
+      end
+
+      it 'displays a form pointing to users/:id/invite' do
+        expect(rendered).to match(
+          Regexp.new(
+            ".*<form.*action=\"#{invite_user_path(@event.creator)}\".*>.*</form>",
+            1 | 4
+          )
         )
-      )
+      end
+
+      it 'displays a text field for inviteds' do
+        expect(rendered).to match(
+          Regexp.new(
+            ".*<form.*>.*<input.*type=\"text\".*name=\"invitation[users]\".*>.*</form>.*",
+            1 | 4
+          )
+        )
+      end
     end
 
-    it 'displays a text field for inviteds' do
-      expect(rendered).to match(
-        Regexp.new(
-          ".*<form.*>.*<input.*type=\"text\".*name=\"invitation[users]\".*>.*</form>.*",
-          1 | 4
+    context 'the logged user is not the owner of the event' do
+      before do
+        controller.session[:user_id] = @stu.id
+      end
+
+      it 'does not display a form pointing to users/:id/invite' do
+        expect(rendered).not_to match(
+          Regexp.new(
+            ".*<form.*action=\"#{invite_user_path(@event.creator)}\".*>.*</form>",
+            1 | 4
+          )
         )
-      )
+      end
+
+      it 'does not display a text field for inviteds' do
+        expect(rendered).not_to match(
+          Regexp.new(
+            ".*<form.*>.*<input.*type=\"text\".*name=\"invitation[users]\".*>.*</form>.*",
+            1 | 4
+          )
+        )
+      end
+    end
+
+    context 'there is not a logged in user' do
+      it 'does not display a form pointing to users/:id/invite' do
+        expect(rendered).not_to match(
+          Regexp.new(
+            ".*<form.*action=\"#{invite_user_path(@event.creator)}\".*>.*</form>",
+            1 | 4
+          )
+        )
+      end
+
+      it 'does not display a text field for inviteds' do
+        expect(rendered).not_to match(
+          Regexp.new(
+            ".*<form.*>.*<input.*type=\"text\".*name=\"invitation[users]\".*>.*</form>.*",
+            1 | 4
+          )
+        )
+      end
     end
   end
 end
