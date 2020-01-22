@@ -12,6 +12,7 @@ RSpec.describe UsersController, type: :controller do
         :invite,
         params: {
           id: @user.id,
+          event_id: @event.id,
           invitation: {
             users: 'lana, stuart'
           }
@@ -41,6 +42,7 @@ RSpec.describe UsersController, type: :controller do
         :invite,
         params: {
           id: @user.id,
+          event_id: @event.id,
           invitation: {
             users: 'lana, stuart'
           }

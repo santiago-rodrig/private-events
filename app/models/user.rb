@@ -12,4 +12,12 @@ class User < ApplicationRecord
   def past_attended_events
     attended_events.where('date < ?', Time.now.to_date)
   end
+
+  def invite(user, event)
+    event.inviteds << user
+  end
+
+  def attend(event)
+    attended_events << event
+  end
 end

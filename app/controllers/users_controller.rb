@@ -21,6 +21,30 @@ class UsersController < ApplicationController
     @past_attended_events = @user.past_attended_events
   end
 
+  def invite
+    @user = User.find(params[:id])
+    @event = Event.find(params[:event_id])
+    inviteds = params[:invitation][:users].strip.split(',').map { |e| e.strip }
+
+    inviteds.each do |invited|
+      user = User.find_by(name: invited)
+      @user.invite(user, @event)
+    end
+
+    render :show
+  end
+
+  def attend
+    @user = User.find(params[:id])
+    @event = Event.find(params[:event_id])
+
+    unless !@event.inviteds.include?(@user)
+      @user.attend(@event)
+    end
+
+    render :show
+  end
+
   private
 
   def user_params
