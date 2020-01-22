@@ -14,10 +14,10 @@ class User < ApplicationRecord
   end
 
   def invite(user, event)
-    event.inviteds << user
+    event.inviteds << user unless event.inviteds.include?(user)
   end
 
   def attend(event)
-    attended_events << event
+    attended_events << event unless attended_events.include?(event)
   end
 end
