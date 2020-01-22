@@ -25,15 +25,6 @@ RSpec.describe 'events/new.html.erb', type: :view do
     )
   end
 
-  it 'displays a date field for the event date' do
-    expect(rendered).to match(
-      Regexp.new(
-        '.*<form.*>.*<input.*type="date".*>.*</form>.*',
-        1 | 4
-      )
-    )
-  end
-
   it 'displays a submit button' do
     expect(rendered).to match(
       Regexp.new(
