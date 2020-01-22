@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       @user.invite(user, @event)
     end
 
-    render :show
+    redirect_to user_url(@user)
   end
 
   def attend
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       @user.attend(@event)
     end
 
-    render :show
+    redirect_to user_url(@user)
   end
 
   private

@@ -31,11 +31,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'redirects to show' do
-      expect(response).to redirect_to(user_path(@user))
-    end
-
-    it 'renders show' do
-      expect(response).to render_template(:show)
+      expect(response).to redirect_to(user_url(@user))
     end
   end
 
@@ -76,12 +72,8 @@ RSpec.describe UsersController, type: :controller do
         expect(@event.attendees).not_to include(@not_invited)
       end
 
-      it 'renders show page' do
-        expect(response).to render_template(:show)
-      end
-
       it 'redirects to show' do
-        expect(response).to redirect_to(user_path(@not_invited))
+        expect(response).to redirect_to(user_url(@not_invited))
       end
     end
 
@@ -101,12 +93,8 @@ RSpec.describe UsersController, type: :controller do
         expect(@event.attendees).to include(@other_user)
       end
 
-      it 'renders show page' do
-        expect(response).to render_template(:show)
-      end
-
       it 'redirects to show' do
-        expect(response).to redirect_to(user_path(@other_user))
+        expect(response).to redirect_to(user_url(@other_user))
       end
     end
   end
