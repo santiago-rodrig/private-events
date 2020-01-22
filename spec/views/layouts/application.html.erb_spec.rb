@@ -11,6 +11,7 @@ RSpec.describe 'layouts/application.html.erb', type: :view do
     )
   end
 
+  # rubocop:disable Metrics/BlockLength
   context 'user logged in' do
     before do
       @user = User.create(name: 'bob')
@@ -54,6 +55,7 @@ RSpec.describe 'layouts/application.html.erb', type: :view do
       )
     end
   end
+  # rubocop:enable Metrics/BlockLength
 
   context 'user not logged in' do
     before do

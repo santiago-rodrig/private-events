@@ -6,10 +6,10 @@ RSpec.describe 'events/index.html.erb', type: :view do
     @jen = User.create(name: 'jen')
 
     @jen.events.create([
-      { description: 'party', date: Date.new(now.year, now.month, now.day + 1) },
-      { description: 'beach party', date: Date.new(now.year, now.month, now.day - 1) },
-      { description: 'birthday party', date: Date.new(now.year, now.month, now.day + 5) }
-    ])
+                         { description: 'party', date: Date.new(now.year, now.month, now.day + 1) },
+                         { description: 'beach party', date: Date.new(now.year, now.month, now.day - 1) },
+                         { description: 'birthday party', date: Date.new(now.year, now.month, now.day + 5) }
+                       ])
 
     @events = Event.all
     @past_events = Event.past

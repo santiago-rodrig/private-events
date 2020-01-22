@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "users/new.html.erb", type: :view do
+RSpec.describe 'users/new.html.erb', type: :view do
   before do
     assign(:user, User.new)
   end

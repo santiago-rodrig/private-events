@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-
-  describe "GET #new" do
+  describe 'GET #new' do
     before do
       get :new
     end
 
-    it "returns http success" do
+    it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
 
@@ -16,13 +15,13 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe "POST #create" do
+  describe 'POST #create' do
     before do
       post :create, params: { user: { name: 'bob' } }
       @user = assigns(:user)
     end
 
-    it "returns http redirect" do
+    it 'returns http redirect' do
       expect(response).to have_http_status(:redirect)
     end
 
@@ -41,13 +40,13 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe "GET #show" do
+  describe 'GET #show' do
     before do
       @user = User.create(name: 'lenny')
       get :show, params: { id: @user.id }
     end
 
-    it "returns http success" do
+    it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
 
@@ -67,5 +66,4 @@ RSpec.describe UsersController, type: :controller do
       expect(assigns(:past_attended_events)).to eq(@user.past_attended_events)
     end
   end
-
 end

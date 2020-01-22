@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "users/show.html.erb", type: :view do
+RSpec.describe 'users/show.html.erb', type: :view do
   before do
     @user = User.create(name: 'bob')
     assign(:user, @user)
@@ -40,12 +40,12 @@ RSpec.describe "users/show.html.erb", type: :view do
 
   it 'displays a list of attended events' do
     @stu = User.create(name: 'stuart')
-    @party_1 = @stu.events.create(description: 'party 1')
-    @party_2 = @stu.events.create(description: 'party 2')
-    @party_3 = @stu.events.create(description: 'party 3')
-    @user.attended_events << @party_1
-    @user.attended_events << @party_2
-    @user.attended_events << @party_3
+    @party1 = @stu.events.create(description: 'party 1')
+    @party2 = @stu.events.create(description: 'party 2')
+    @party3 = @stu.events.create(description: 'party 3')
+    @user.attended_events << @party1
+    @user.attended_events << @party2
+    @user.attended_events << @party3
     assign(:attended_events, @user.attended_events)
     assign(:past_attended_events, @user.past_attended_events)
     assign(:upcoming_attended_events, @user.upcoming_attended_events)
@@ -65,17 +65,17 @@ RSpec.describe "users/show.html.erb", type: :view do
     now = Time.now
     @stu = User.create(name: 'stuart')
 
-    @party_1 = @stu.events.create(
+    @party1 = @stu.events.create(
       description: 'party 1',
       date: Date.new(now.year, now.month, now.day + 2)
     )
 
-    @party_2 = @stu.events.create(
+    @party2 = @stu.events.create(
       description: 'party 2',
       date: Date.new(now.year, now.month, now.day - 3)
     )
 
-    @party_3 = @stu.events.create(
+    @party3 = @stu.events.create(
       description: 'party 1',
       date: Date.new(now.year, now.month, now.day - 1)
     )
@@ -99,24 +99,24 @@ RSpec.describe "users/show.html.erb", type: :view do
     now = Time.now
     @stu = User.create(name: 'stuart')
 
-    @party_1 = @stu.events.create(
+    @party1 = @stu.events.create(
       description: 'party 1',
       date: Date.new(now.year, now.month, now.day - 2)
     )
 
-    @party_2 = @stu.events.create(
+    @party2 = @stu.events.create(
       description: 'party 2',
       date: Date.new(now.year, now.month, now.day + 3)
     )
 
-    @party_3 = @stu.events.create(
+    @party3 = @stu.events.create(
       description: 'party 1',
       date: Date.new(now.year, now.month, now.day + 1)
     )
 
-    @user.attended_events << @party_1
-    @user.attended_events << @party_2
-    @user.attended_events << @party_3
+    @user.attended_events << @party1
+    @user.attended_events << @party2
+    @user.attended_events << @party3
     assign(:attended_events, @user.attended_events)
     assign(:past_attended_events, @user.past_attended_events)
     assign(:upcoming_attended_events, @user.upcoming_attended_events)
