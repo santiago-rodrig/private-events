@@ -155,10 +155,7 @@ RSpec.describe 'users/show.html.erb', type: :view do
         render
         @user.inviting_events.each do |event|
           expect(rendered).to match(
-            Regexp.new(
-              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{attend_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
-              1 | 4
-            )
+            /.*<h2>Invitations<\/h2>.*#{event.description}.*<a.*href="\/users\/#{@user.id}\/attend\?event_id=#{event.id}".*>Attend<\/a>.*/mi
           )
         end
       end
@@ -177,10 +174,7 @@ RSpec.describe 'users/show.html.erb', type: :view do
         render
         @user.inviting_events.each do |event|
           expect(rendered).not_to match(
-            Regexp.new(
-              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{attend_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
-              1 | 4
-            )
+            /.*<h2>Invitations<\/h2>.*#{event.description}.*<a.*href="\/users\/#{@user.id}\/attend\?event_id=#{event.id}".*>Attend<\/a>.*/mi
           )
         end
       end
@@ -194,10 +188,7 @@ RSpec.describe 'users/show.html.erb', type: :view do
         render
         @user.inviting_events.each do |event|
           expect(rendered).not_to match(
-            Regexp.new(
-              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{attend_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
-              1 | 4
-            )
+            /.*<h2>Invitations<\/h2>.*#{event.description}.*<a.*href="\/users\/#{@user.id}\/attend\?event_id=#{event.id}".*>Attend<\/a>.*/mi
           )
         end
       end

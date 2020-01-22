@@ -1,5 +1,17 @@
 <h1><%= @user.name %></h1>
 
+<% if current_user && current_user == @user %>
+  <h2>Invitations</h2>
+  <ul>
+    <% @user.inviting_events.each do |event| %>
+      <li>
+        <%= event.description %> |
+        <%= link_to 'Attend', attend_user_path(id: @user.id, event_id: event.id), method: :post %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <h2>All created events</h2>
 <ul>
   <% @user.events.each do |event| %>
