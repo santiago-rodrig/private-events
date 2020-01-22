@@ -131,4 +131,54 @@ RSpec.describe 'users/show.html.erb', type: :view do
       )
     end
   end
+
+  context 'invitations' do
+    context 'logged user is the same user' do
+      before do
+        controller.session[:user_id] = @user.id
+      end
+
+      it 'displays a list of invitations with links to attend' do
+        render
+        @user.inviting_events.each do |event|
+          expect(rendered).to match(
+            Regexp.new(
+              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{atted_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
+              1 | 4
+            )
+        end
+      end
+    end
+
+    context 'logged user is not the same user' do
+      before do
+        @other = User.create(name: 'antonio')
+        controller.session[:user_id] = @other.id
+      end
+
+      it 'does not display a list of invitations at all' do
+        render
+        @user.inviting_events.each do |event|
+          expect(rendered).not_to match(
+            Regexp.new(
+              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{atted_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
+              1 | 4
+            )
+        end
+      end
+    end
+
+    context 'no logged in user' do
+      it 'does not display a list of invitations at all' do
+        render
+        @user.inviting_events.each do |event|
+          expect(rendered).not_to match(
+            Regexp.new(
+              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{atted_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
+              1 | 4
+            )
+        end
+      end
+    end
+  end
 end
