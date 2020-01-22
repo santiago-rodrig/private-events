@@ -84,7 +84,7 @@ RSpec.describe 'events/show.html.erb', type: :view do
       it 'displays a submit button' do
         render
         expect(rendered).to match(
-          /.*<form.*>.*<input.*type="submit".*>.*<\/form>/
+          /.*<form.*>.*<input.*type="submit".*>.*<\/form>/mi
         )
       end
     end
@@ -117,7 +117,7 @@ RSpec.describe 'events/show.html.erb', type: :view do
       it 'does not display a submit button' do
         render
         expect(rendered).not_to match(
-          /.*<form.*>.*<input.*type="submit".*>.*<\/form>/
+          /.*<form.*>.*<input.*type="submit".*>.*<\/form>/mi
         )
       end
     end
@@ -146,7 +146,7 @@ RSpec.describe 'events/show.html.erb', type: :view do
       it 'does not display a submit button' do
         render
         expect(rendered).not_to match(
-          /.*<form.*>.*<input.*type="submit".*>.*<\/form>/
+          /.*<form.*>.*<input.*type="submit".*>.*<\/form>/mi
         )
       end
     end
