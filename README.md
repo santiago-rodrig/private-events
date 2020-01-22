@@ -42,7 +42,8 @@ rspec
 
 ## Launching
 
-Just run `rails server`. Then visit [localhost:3000](http://localhost:3000/).
-If for some reason you have a server running in that same port just change
-the port with `rails server -p XXXX`, where `XXXX` is any number greater than
-1024 (below that we have permission troubles). For example `3001` could work.
+Just run `rails server` from the app directory. Then visit
+[localhost:3000](http://localhost:3000/). If for some reason you have a server
+running in that same port just change the port with `rails server -p XXXX`,
+where `XXXX` is any number greater than 1024 (below that we have permission
+troubles). For example `3001` could work.
