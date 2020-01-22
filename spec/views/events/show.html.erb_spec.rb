@@ -11,10 +11,10 @@ RSpec.describe 'events/show.html.erb', type: :view do
     @attendees = @event.attendees
     assign(:event, @event)
     assign(:attendees, @attendees)
-    render
   end
 
   it 'displays the description of the event' do
+    render
     expect(rendered).to match(
       Regexp.new(
         ".*<h2>Description</h2>.*#{@event.description}.*",
@@ -24,6 +24,7 @@ RSpec.describe 'events/show.html.erb', type: :view do
   end
 
   it 'displays the date of the event' do
+    render
     expect(rendered).to match(
       Regexp.new(
         ".*<h2>Date</h2>.*#{@event.date}.*",
@@ -33,6 +34,7 @@ RSpec.describe 'events/show.html.erb', type: :view do
   end
 
   it 'displays the creator of the event' do
+    render
     expect(rendered).to match(
       Regexp.new(
         ".*<h2>Creator</h2>.*#{@event.creator.name}.*<a.*href=\"#{user_path(@event.creator)}\".*>Show</a>.*",
@@ -42,6 +44,7 @@ RSpec.describe 'events/show.html.erb', type: :view do
   end
 
   it 'displays a list of attendees' do
+    render
     @attendees.each do |attendee|
       expect(rendered).to match(
         Regexp.new(
@@ -59,6 +62,7 @@ RSpec.describe 'events/show.html.erb', type: :view do
       end
 
       it 'displays a form pointing to users/:id/invite' do
+        render
         expect(rendered).to match(
           Regexp.new(
             ".*<form.*action=\"#{invite_user_path(@event.creator)}\".*>.*</form>",
@@ -68,9 +72,10 @@ RSpec.describe 'events/show.html.erb', type: :view do
       end
 
       it 'displays a text field for inviteds' do
+        render
         expect(rendered).to match(
           Regexp.new(
-            ".*<form.*>.*<input.*type=\"text\".*name=\"invitation[users]\".*>.*</form>.*",
+            ".*<form.*>.*<input.*[(name=\"invitation\[users\]\")(type=\"text\")].*>.*</form>.*",
             1 | 4
           )
         )
@@ -83,6 +88,7 @@ RSpec.describe 'events/show.html.erb', type: :view do
       end
 
       it 'does not display a form pointing to users/:id/invite' do
+        render
         expect(rendered).not_to match(
           Regexp.new(
             ".*<form.*action=\"#{invite_user_path(@event.creator)}\".*>.*</form>",
@@ -92,9 +98,10 @@ RSpec.describe 'events/show.html.erb', type: :view do
       end
 
       it 'does not display a text field for inviteds' do
+        render
         expect(rendered).not_to match(
           Regexp.new(
-            ".*<form.*>.*<input.*type=\"text\".*name=\"invitation[users]\".*>.*</form>.*",
+            ".*<form.*>.*<input.*[(name=\"invitation\[users\]\")(type=\"text\")].*>.*</form>.*",
             1 | 4
           )
         )
@@ -103,6 +110,7 @@ RSpec.describe 'events/show.html.erb', type: :view do
 
     context 'there is not a logged in user' do
       it 'does not display a form pointing to users/:id/invite' do
+        render
         expect(rendered).not_to match(
           Regexp.new(
             ".*<form.*action=\"#{invite_user_path(@event.creator)}\".*>.*</form>",
@@ -112,9 +120,10 @@ RSpec.describe 'events/show.html.erb', type: :view do
       end
 
       it 'does not display a text field for inviteds' do
+        render
         expect(rendered).not_to match(
           Regexp.new(
-            ".*<form.*>.*<input.*type=\"text\".*name=\"invitation[users]\".*>.*</form>.*",
+            ".*<form.*>.*<input.*[(name=\"invitation\[users\]\")(type=\"text\")].*>.*</form>.*",
             1 | 4
           )
         )

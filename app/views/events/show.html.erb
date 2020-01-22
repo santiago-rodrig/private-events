@@ -20,9 +20,9 @@
 <% if current_user && current_user == @event.creator %>
   <%= form_tag(invite_user_path(@event.creator)) do %>
     <%= hidden_field_tag :event_id, "#{@event.id}" %>
-    <%= fields_for :invitation do |f| %>
-      <div><%= label_tag :users, 'Users to invite' %></div>
-      <div><%= text_field_tag :users, '', placeholder: 'jen, bob, stuart' %></div>
+    <%= fields :invitation do |f| %>
+      <div><%= f.label :users, 'Users to invite' %></div>
+      <div><%= f.text_field :users, placeholder: 'jen, bob, stuart' %></div>
     <% end %>
   <% end %>
 <% end %>
