@@ -11,8 +11,15 @@
   <body>
     <header>
       <% if current_user %>
-        <%= current_user.name %>
+        <%= current_user.name %> |
+        <%= link_to 'Profile', user_path(current_user) %> |
+        <%= link_to 'Logout', logout_path, method: :delete %> |
+        <%= link_to 'Create event', new_event_path %> |
+      <% else %>
+        <%= link_to 'Sign up', new_user_path %> |
+        <%= link_to 'Login', login_path %> |
       <% end %>
+      <%= link_to 'Events', events_path %>
     </header>
     <%= yield %>
   </body>
