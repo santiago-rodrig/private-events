@@ -42,21 +42,4 @@ RSpec.describe "events/show.html.erb", type: :view do
       )
     end
   end
-
-  context 'user logged in' do
-    before do
-      @jen = User.create(name: 'jen')
-      controller.session[:user_id] = @jen.id
-      render template: 'events/show', layout: 'layouts/application'
-    end
-
-    it 'displays the name of the logged in user at the top' do
-      expect(rendered).to match(
-        Regexp.new(
-          ".*<header.*>.*#{@jen.name}.*</header>.*",
-          1 | 4
-        )
-      )
-    end
-  end
 end

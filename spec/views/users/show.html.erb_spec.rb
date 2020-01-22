@@ -131,25 +131,4 @@ RSpec.describe "users/show.html.erb", type: :view do
       )
     end
   end
-
-  context 'the user is signed in' do
-    before do
-      @user = User.create(name: 'bob')
-      controller.session[:user_id] = @user.id
-      assign(:user, @user)
-      assign(:attended_events, @user.attended_events)
-      assign(:past_attended_events, @user.past_attended_events)
-      assign(:upcoming_attended_events, @user.upcoming_attended_events)
-      render template: 'users/new', layout: 'layouts/application'
-    end
-
-    it 'displays the name of the user at the top' do
-      expect(rendered).to match(
-        Regexp.new(
-          ".*<header.*>.*#{@user.name}.*</header>.*",
-          1 | 4
-        )
-      )
-    end
-  end
 end

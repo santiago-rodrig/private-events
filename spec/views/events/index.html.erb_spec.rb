@@ -20,11 +20,11 @@ RSpec.describe 'events/index.html.erb', type: :view do
     render
   end
 
-  it 'displays all the event names' do
+  it 'displays all the event' do
     @events.each do |event|
       expect(rendered).to match(
         Regexp.new(
-          ".*<h2>All events</h2>.*#{event.description}.*",
+          ".*<h2>All events</h2>.*#{event.description}.*<a.*href=\"#{event_path(event)}\".*>Show</a>.*",
           1 | 4
         )
       )
@@ -35,7 +35,7 @@ RSpec.describe 'events/index.html.erb', type: :view do
     @past_events.each do |event|
       expect(rendered).to match(
         Regexp.new(
-          ".*<h2>Past events</h2>.*#{event.description}.*",
+          ".*<h2>Past events</h2>.*#{event.description}.*<a.*href=\"#{event_path(event)}\".*>Show</a>.*",
           1 | 4
         )
       )
@@ -46,27 +46,7 @@ RSpec.describe 'events/index.html.erb', type: :view do
     @future_events.each do |event|
       expect(rendered).to match(
         Regexp.new(
-          ".*<h2>Future events</h2>.*#{event.description}.*",
-          1 | 4
-        )
-      )
-    end
-  end
-
-  it 'displays a list of future events' do
-  end
-
-  context 'user logged in' do
-    before do
-      @user = User.create(name: 'bob')
-      controller.session[:user_id] = @user.id
-      render template: 'events/index', layout: 'layouts/application'
-    end
-
-    it 'displays the name of the logged user at the top' do
-      expect(rendered).to match(
-        Regexp.new(
-          ".*<header.*>.*#{@user.name}.*</header>.*",
+          ".*<h2>Future events</h2>.*#{event.description}.*<a.*href=\"#{event_path(event)}\".*>Show</a>.*",
           1 | 4
         )
       )
