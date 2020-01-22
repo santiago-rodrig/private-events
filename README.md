@@ -33,7 +33,7 @@ rails db:migrate RAILS_ENV=test
 ## Test suite
 
 To run the tests that verify the proper behavior of the Rails app, run the
-following command. There are about **82 passing specs**, this should make you
+following command. There are about **109 passing specs**, this should make you
 stop worrying about a malfunction in the app.
 
 ```shell
