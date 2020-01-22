@@ -39,6 +39,17 @@ RSpec.describe User, type: :model do
     expect(@event.inviteds).to include(other_user)
   end
 
+  it 'does not invite user if already in inviteds' do
+    expect(@user).to be_respond_to(:invite)
+    other_user = User.create(name: 'lana')
+    @user.invite(other_user, @event)
+    expect(other_user.inviting_events).to include(@event)
+    expect(@event.inviteds).to include(other_user)
+    expect(@event.inviteds.count).to eq(1)
+    @user.invite(other_user, @event)
+    expect(@event.inviteds.count).to eq(1)
+  end
+
   it 'attends events' do
     expect(@user).to be_respond_to(:attend)
     other_user = User.create(name: 'lana')
@@ -46,6 +57,18 @@ RSpec.describe User, type: :model do
     other_user.attend(@event)
     expect(@event.attendees).to include(other_user)
     expect(other_user.attended_events).to include(@event)
+  end
+
+  it 'does not attend event if already attended' do
+    expect(@user).to be_respond_to(:attend)
+    other_user = User.create(name: 'lana')
+    @user.invite(other_user, @event)
+    other_user.attend(@event)
+    expect(@event.attendees).to include(other_user)
+    expect(other_user.attended_events).to include(@event)
+    expect(other_user.attended_events.count).to eq(1)
+    other_user.attend(@event)
+    expect(other_user.attended_events.count).to eq(1)
   end
 
   it 'has past_attended_events' do
