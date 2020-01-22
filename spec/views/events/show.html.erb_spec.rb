@@ -80,6 +80,13 @@ RSpec.describe 'events/show.html.erb', type: :view do
           )
         )
       end
+
+      it 'displays a submit button' do
+        render
+        expect(rendered).to match(
+          /.*<form.*>.*<input.*type="submit".*>.*<\/form>/
+        )
+      end
     end
 
     context 'the logged user is not the owner of the event' do
@@ -106,6 +113,13 @@ RSpec.describe 'events/show.html.erb', type: :view do
           )
         )
       end
+
+      it 'does not display a submit button' do
+        render
+        expect(rendered).not_to match(
+          /.*<form.*>.*<input.*type="submit".*>.*<\/form>/
+        )
+      end
     end
 
     context 'there is not a logged in user' do
@@ -126,6 +140,13 @@ RSpec.describe 'events/show.html.erb', type: :view do
             ".*<form.*>.*<input.*[(name=\"invitation\[users\]\")(type=\"text\")].*>.*</form>.*",
             1 | 4
           )
+        )
+      end
+
+      it 'does not display a submit button' do
+        render
+        expect(rendered).not_to match(
+          /.*<form.*>.*<input.*type="submit".*>.*<\/form>/
         )
       end
     end
