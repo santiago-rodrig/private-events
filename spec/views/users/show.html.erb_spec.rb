@@ -133,19 +133,33 @@ RSpec.describe 'users/show.html.erb', type: :view do
   end
 
   context 'invitations' do
+    before do
+      @sam = User.create(name: 'sam')
+      @event1 = @sam.events.create(description: 'event 1')
+      @event2 = @sam.events.create(description: 'event 2')
+      @event3 = @sam.events.create(description: 'event 3')
+      @sam.invite(@user, @event1)
+      @sam.invite(@user, @event2)
+      @sam.invite(@user, @event3)
+    end
+
     context 'logged user is the same user' do
       before do
         controller.session[:user_id] = @user.id
       end
 
       it 'displays a list of invitations with links to attend' do
+        assign(:attended_events, @user.attended_events)
+        assign(:past_attended_events, @user.past_attended_events)
+        assign(:upcoming_attended_events, @user.upcoming_attended_events)
         render
         @user.inviting_events.each do |event|
           expect(rendered).to match(
             Regexp.new(
-              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{atted_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
+              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{attend_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
               1 | 4
             )
+          )
         end
       end
     end
@@ -157,26 +171,34 @@ RSpec.describe 'users/show.html.erb', type: :view do
       end
 
       it 'does not display a list of invitations at all' do
+        assign(:attended_events, @user.attended_events)
+        assign(:past_attended_events, @user.past_attended_events)
+        assign(:upcoming_attended_events, @user.upcoming_attended_events)
         render
         @user.inviting_events.each do |event|
           expect(rendered).not_to match(
             Regexp.new(
-              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{atted_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
+              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{attend_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
               1 | 4
             )
+          )
         end
       end
     end
 
     context 'no logged in user' do
       it 'does not display a list of invitations at all' do
+        assign(:attended_events, @user.attended_events)
+        assign(:past_attended_events, @user.past_attended_events)
+        assign(:upcoming_attended_events, @user.upcoming_attended_events)
         render
         @user.inviting_events.each do |event|
           expect(rendered).not_to match(
             Regexp.new(
-              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{atted_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
+              ".*<h2>Invitations</h2>.*#{event.description}.*<a.*href=\"#{attend_user_path(id: @user.id, event_id: event.id)}\".*>Attend</a>.*",
               1 | 4
             )
+          )
         end
       end
     end
