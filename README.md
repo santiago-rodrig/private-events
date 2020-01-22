@@ -14,8 +14,10 @@ user. This should work in Linux and Mac operative systems.
 
 ```shell
 git clone --single-branch --branch 'feature/private-events' \
-https://github.com/santiago-rodrig/private-events &&
-cd private-events && rails db:reset && rails db:migrate
+https://github.com/santiago-rodrig/private-events && \
+cd private-events && bundle install && yarn install --check-files && \
+rails db:reset && rails db:reset RAILS_ENV=test && rails db:migrate && \
+rails db:migrate RAILS_ENV=test
 ```
 
 ## Test suite
@@ -24,5 +26,5 @@ To run the tests that verify the proper behavior of the Rails app, run the
 following command.
 
 ```shell
-rails spec
+rspec
 ```
