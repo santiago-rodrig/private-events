@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'layouts/application.html.erb', type: :view do
   it 'displays a link for listing events' do
-    render text: '', layout: 'layouts/application'
+    render html: '', layout: 'layouts/application'
     expect(rendered).to match(
       Regexp.new(
         ".*<header.*>.*<a.*href=\"#{events_path}\".*>Events</a>.*",
@@ -15,7 +15,7 @@ RSpec.describe 'layouts/application.html.erb', type: :view do
     before do
       @user = User.create(name: 'bob')
       controller.session[:user_id] = @user.id
-      render text: '', layout: 'layouts/application'
+      render html: '', layout: 'layouts/application'
     end
 
     it 'displays the name of the logged user at the top' do
@@ -59,7 +59,7 @@ RSpec.describe 'layouts/application.html.erb', type: :view do
     before do
       @user = User.create(name: 'bob')
       controller.session.delete(:user_id)
-      render text: '', layout: 'layouts/application'
+      render html: '', layout: 'layouts/application'
     end
 
     it 'does not display the name of the user at the top' do
