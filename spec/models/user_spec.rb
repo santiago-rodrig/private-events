@@ -31,6 +31,23 @@ RSpec.describe User, type: :model do
     expect(@user.attended_events).to include(event)
   end
 
+  it 'invites users' do
+    expect(@user).to be_respond_to(:invite)
+    other_user = User.create(name: 'lana')
+    @user.invite(other_user, @event)
+    expect(other_user.inviting_events).to include(@event)
+    expect(@event.inviteds).to include(other_user)
+  end
+
+  it 'attends events' do
+    expect(@user).to be_respond_to(:attend)
+    other_user = User.create(name: 'lana')
+    @user.invite(other_user, @event)
+    other_user.attend(@event)
+    expect(@event.attendees).to include(other_user)
+    expect(other_user.attended_events).to include(@event)
+  end
+
   it 'has past_attended_events' do
     now = Time.now.to_date
     user = User.create(name: 'crystal')
