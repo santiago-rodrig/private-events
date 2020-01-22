@@ -1,6 +1,98 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  describe 'POST #invite' do
+    before do
+      @user = User.create(name: 'bob')
+      @other_user = User.create(name: 'lana')
+      @another_user = User.create(name: 'stuart')
+      @event = @user.events.create(description: 'party')
+
+      post(
+        :invite,
+        params: {
+          id: @user.id,
+          invitation: {
+            users: 'lana, stuart'
+          }
+        }
+      )
+    end
+
+    it 'invites the users' do
+      expect(@event.inviteds).to include(@other_user)
+      expect(@event.inviteds).to include(@another_user)
+      expect(@event.inviteds.count).to eq(2)
+      expect(@other_user.inviting_events).to include(@event)
+      expect(@another_user.inviting_events).to include(@event)
+      expect(@other_user.inviting_events.count).to eq(1)
+      expect(@another_user.inviting_events.count).to eq(1)
+    end
+  end
+
+  describe 'POST #attend' do
+    before do
+      @user = User.create(name: 'bob')
+      @other_user = User.create(name: 'lana')
+      @another_user = User.create(name: 'stuart')
+      @event = @user.events.create(description: 'party')
+
+      post(
+        :invite,
+        params: {
+          id: @user.id,
+          invitation: {
+            users: 'lana, stuart'
+          }
+        }
+      )
+    end
+
+    context 'the user is not invited' do
+      before do
+        @not_invited = User.create(name: 'gabriel')
+
+        post(
+          :attend,
+          params: {
+            id: @not_invited.id,
+            event_id: @event.id
+          }
+        )
+      end
+
+      it 'can not attend the event' do
+        expect(@not_invited.attended_events).not_to include(@event)
+        expect(@event.attendees).not_to include(@not_invited)
+      end
+
+      it 'renders show page' do
+        expect(response).to render_template(:show)
+      end
+    end
+
+    context 'the user is invited' do
+      before do
+        post(
+          :attend,
+          params: {
+            id: @other_user.id,
+            event_id: @event.id
+          }
+        )
+      end
+
+      it 'can attend the event' do
+        expect(@other_user.attended_events).to include(@event)
+        expect(@event.attendees).to include(@other_user)
+      end
+
+      it 'renders show page' do
+        expect(response).to render_template(:show)
+      end
+    end
+  end
+
   describe 'GET #new' do
     before do
       get :new
