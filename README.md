@@ -7,6 +7,16 @@ the instructions for this practice project can be found in
 In summary, this is the backend of an event's site that has users and events
 related in many ways.
 
+## Requirements
+
+Here is a list of dependencies of this app.
+
+- `rails` 5.1.7
+- `ruby` 2.6.5
+- `bundler` 2.0.2
+- `yarn` 1.19.2
+- `sqlite3` 3.27.2
+
 ## Setup
 
 Copy and paste the following chain of commands in your terminal as a regular
