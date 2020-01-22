@@ -51,4 +51,24 @@ RSpec.describe 'events/show.html.erb', type: :view do
       )
     end
   end
+
+  context 'invitations' do
+    it 'displays a form pointing to users/:id/invite' do
+      expect(rendered).to match(
+        Regexp.new(
+          ".*<form.*action=\"#{invite_user_path(@event.user)}\".*>.*</form>",
+          1 | 4
+        )
+      )
+    end
+
+    it 'displays a text field for inviteds' do
+      expect(rendered).to match(
+        Regexp.new(
+          ".*<form.*>.*<input.*type=\"text\".*name=\"invitation[users]\".*>.*</form>.*",
+          1 | 4
+        )
+      )
+    end
+  end
 end
