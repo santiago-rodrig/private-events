@@ -10,7 +10,7 @@ RSpec.describe "LogOuts", type: :system do
     visit(login_path)
     fill_in('Name', with: 'bob')
     find('input[type="submit"]').click
-    click_link('Log out')
+    click_link('Logout')
     expect(page).not_to have_content(@user.name)
     expect(page).not_to have_content('Log out')
     expect(page).not_to have_content('Create event')
