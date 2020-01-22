@@ -40,4 +40,34 @@ RSpec.describe Event, type: :model do
       expect(Event.future).to eq(Event.where('date > ?', Time.now.to_date))
     end
   end
+
+  it 'has many attendees' do
+    event = @user.events.create(description: 'party')
+    user1 = User.create(name: 'user 1')
+    user2 = User.create(name: 'user 2')
+    user3 = User.create(name: 'user 3')
+    expect(event).to be_respond_to(:attendees)
+    event.attendees << user1
+    event.attendees << user2
+    event.attendees << user3
+    expect(event.attendees).to include(user1)
+    expect(event.attendees).to include(user2)
+    expect(event.attendees).to include(user3)
+    expect(event.attendees.count).to eq(3)
+  end
+
+  it 'has many inviteds' do
+    event = @user.events.create(description: 'party')
+    user1 = User.create(name: 'user 1')
+    user2 = User.create(name: 'user 2')
+    user3 = User.create(name: 'user 3')
+    expect(event).to be_respond_to(:inviteds)
+    event.inviteds << user1
+    event.inviteds << user2
+    event.inviteds << user3
+    expect(event.inviteds).to include(user1)
+    expect(event.inviteds).to include(user2)
+    expect(event.inviteds).to include(user3)
+    expect(event.inviteds.count).to eq(3)
+  end
 end

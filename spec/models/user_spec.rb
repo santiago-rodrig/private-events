@@ -84,4 +84,20 @@ RSpec.describe User, type: :model do
     expect(@user.upcoming_attended_events).to eq(upcoming_events)
     expect(@user.upcoming_attended_events.count).to eq(2)
   end
+
+  it 'has many inviting_events' do
+    user = User.create(name: 'sam')
+    other_user = User.create(name: 'jhon')
+    event1 = other_user.events.create(description: 'party 1')
+    event2 = other_user.events.create(description: 'party 2')
+    event3 = other_user.events.create(description: 'party 3')
+    expect(user).to be_respond_to(:inviting_events)
+    user.inviting_events << event1
+    user.inviting_events << event2
+    user.inviting_events << event3
+    expect(user.inviting_events).to include(event1)
+    expect(user.inviting_events).to include(event2)
+    expect(user.inviting_events).to include(event3)
+    expect(user.inviting_events.count).to eq(3)
+  end
 end
