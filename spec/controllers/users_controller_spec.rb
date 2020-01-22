@@ -29,6 +29,14 @@ RSpec.describe UsersController, type: :controller do
       expect(@other_user.inviting_events.count).to eq(1)
       expect(@another_user.inviting_events.count).to eq(1)
     end
+
+    it 'redirects to show' do
+      expect(response).to redirect_to(user_path(@user))
+    end
+
+    it 'renders show' do
+      expect(response).to render_template(:show)
+    end
   end
 
   describe 'POST #attend' do
@@ -71,6 +79,10 @@ RSpec.describe UsersController, type: :controller do
       it 'renders show page' do
         expect(response).to render_template(:show)
       end
+
+      it 'redirects to show' do
+        expect(response).to redirect_to(user_path(@not_invited))
+      end
     end
 
     context 'the user is invited' do
@@ -91,6 +103,10 @@ RSpec.describe UsersController, type: :controller do
 
       it 'renders show page' do
         expect(response).to render_template(:show)
+      end
+
+      it 'redirects to show' do
+        expect(response).to redirect_to(user_path(@other_user))
       end
     end
   end
