@@ -17,7 +17,7 @@ RSpec.describe "events/show.html.erb", type: :view do
   it 'displays the description of the event' do
     expect(rendered).to match(
       Regexp.new(
-        ".*#{@event.description}.*",
+        ".*<h2>Description</h2>.*#{@event.description}.*",
         1 | 4
       )
     )
@@ -26,7 +26,7 @@ RSpec.describe "events/show.html.erb", type: :view do
   it 'displays the creator of the event' do
     expect(rendered).to match(
       Regexp.new(
-        ".*#{@event.creator.name}.*",
+        ".*<h2>Creator</h2>.*#{@event.creator.name}.*<a.*href=\"#{event_path(event)}\".*>Show</a>.*",
         1 | 4
       )
     )
@@ -36,7 +36,7 @@ RSpec.describe "events/show.html.erb", type: :view do
     @attendees.each do |attendee|
       expect(rendered).to match(
         Regexp.new(
-          ".*#{attendee.name}.*",
+          ".*<h2>Attendees</h2>.*#{attendee.name}.*<a.*href=\"#{user_path(attendee)}\".*>Show</a>.*",
           1 | 4
         )
       )

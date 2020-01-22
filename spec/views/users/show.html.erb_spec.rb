@@ -31,7 +31,7 @@ RSpec.describe "users/show.html.erb", type: :view do
     @user.events.each do |event|
       expect(rendered).to match(
         Regexp.new(
-          ".*#{event.description}.*",
+          ".*<h2>All created events</h2>.*#{event.description}.*<a.*href=\"#{event_path(event)}\".*>Show</a>.*",
           1 | 4
         )
       )
@@ -54,7 +54,7 @@ RSpec.describe "users/show.html.erb", type: :view do
     @user.attended_events.each do |event|
       expect(rendered).to match(
         Regexp.new(
-          ".*#{event.description}.*",
+          ".*<h2>All attended events</h2>.*#{event.description}.*<a.*href=\"#{event_path(event)}\".*>Show</a>.*",
           1 | 4
         )
       )
@@ -88,7 +88,7 @@ RSpec.describe "users/show.html.erb", type: :view do
     @user.past_attended_events.each do |event|
       expect(rendered).to match(
         Regexp.new(
-          ".*<h2>Past attended events</h2>.*#{event.description}.*",
+          ".*<h2>Past attended events</h2>.*#{event.description}.*<a.*href=\"#{event_path(event)}\".*>Show</a>.*",
           1 | 4
         )
       )
@@ -125,7 +125,7 @@ RSpec.describe "users/show.html.erb", type: :view do
     @user.upcoming_attended_events.each do |event|
       expect(rendered).to match(
         Regexp.new(
-          ".*<h2>Upcoming events to attend</h2>.*#{event.description}.*",
+          ".*<h2>Upcoming events to attend</h2>.*#{event.description}.*<a.*href=\"#{event_path(event)}\".*>Show</a>.*",
           1 | 4
         )
       )
