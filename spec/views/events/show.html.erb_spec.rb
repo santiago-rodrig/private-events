@@ -23,6 +23,15 @@ RSpec.describe "events/show.html.erb", type: :view do
     )
   end
 
+  it 'displays the date of the event' do
+    expect(rendered).to match(
+      Regexp.new(
+        ".*<h2>Date</h2>.*#{@event.date}.*",
+        1 | 4
+      )
+    )
+  end
+
   it 'displays the creator of the event' do
     expect(rendered).to match(
       Regexp.new(
