@@ -35,6 +35,10 @@ RSpec.describe UsersController, type: :controller do
       post :create, params: { user: { name: 'gabriel' } }
       expect(User.count).to eq(count + 1)
     end
+
+    it 'logins the new user' do
+      expect(controller.session[:user_id]).to eq(@user.id)
+    end
   end
 
   describe "GET #show" do
