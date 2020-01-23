@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 group :test do
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 3.18.0'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'webdrivers'
