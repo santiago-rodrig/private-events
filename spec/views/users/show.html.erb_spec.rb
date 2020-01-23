@@ -132,6 +132,7 @@ RSpec.describe 'users/show.html.erb', type: :view do
     end
   end
 
+  # rubocop:disable Metrics/BlockLength
   context 'invitations' do
     before do
       @sam = User.create(name: 'sam')
@@ -155,7 +156,8 @@ RSpec.describe 'users/show.html.erb', type: :view do
         render
         @user.inviting_events.each do |event|
           expect(rendered).to match(
-            /.*<h2>Invitations<\/h2>.*#{event.description}.*<a.*href="\/users\/#{@user.id}\/attend\?event_id=#{event.id}".*>Attend<\/a>.*/mi
+            # rubocop:disable Layout/LineLength
+            %r{.*<h2>Invitations</h2>.*#{event.description}.*<a.*href="/users/#{@user.id}/attend\?event_id=#{event.id}".*>Attend</a>.*}mi
           )
         end
       end
@@ -174,7 +176,7 @@ RSpec.describe 'users/show.html.erb', type: :view do
         render
         @user.inviting_events.each do |event|
           expect(rendered).not_to match(
-            /.*<h2>Invitations<\/h2>.*#{event.description}.*<a.*href="\/users\/#{@user.id}\/attend\?event_id=#{event.id}".*>Attend<\/a>.*/mi
+            %r{.*<h2>Invitations</h2>.*#{event.description}.*<a.*href="/users/#{@user.id}/attend\?event_id=#{event.id}".*>Attend</a>.*}mi
           )
         end
       end
@@ -188,10 +190,12 @@ RSpec.describe 'users/show.html.erb', type: :view do
         render
         @user.inviting_events.each do |event|
           expect(rendered).not_to match(
-            /.*<h2>Invitations<\/h2>.*#{event.description}.*<a.*href="\/users\/#{@user.id}\/attend\?event_id=#{event.id}".*>Attend<\/a>.*/mi
+            %r{.*<h2>Invitations</h2>.*#{event.description}.*<a.*href="/users/#{@user.id}/attend\?event_id=#{event.id}".*>Attend</a>.*}mi
+            # rubocop:enable Layout/LineLength
           )
         end
       end
     end
   end
+  # rubocop:enable Metrics/BlockLength
 end

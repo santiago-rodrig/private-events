@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "LogOuts", type: :system do
+RSpec.describe 'LogOuts', type: :system do
   before do
     driven_by(:selenium_chrome)
   end

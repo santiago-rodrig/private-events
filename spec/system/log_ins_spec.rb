@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "LogIns", type: :system do
+RSpec.describe 'LogIns', type: :system do
   before do
     driven_by(:selenium_chrome)
   end

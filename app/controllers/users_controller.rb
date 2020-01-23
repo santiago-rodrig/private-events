@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def invite
     @user = User.find(params[:id])
     @event = Event.find(params[:event_id])
-    inviteds = params[:invitation][:users].strip.split(',').map { |e| e.strip }
+    inviteds = params[:invitation][:users].strip.split(',').map(&:strip)
 
     inviteds.each do |invited|
       user = User.find_by(name: invited)
@@ -38,9 +38,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @event = Event.find(params[:event_id])
 
-    unless !@event.inviteds.include?(@user)
-      @user.attend(@event)
-    end
+    @user.attend(@event) if @event.inviteds.include?(@user)
 
     redirect_to user_url(@user)
   end

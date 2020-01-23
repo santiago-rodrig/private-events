@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "AttendEvents", type: :system do
+RSpec.describe 'AttendEvents', type: :system do
   before do
     driven_by(:selenium_chrome)
     @user = User.create(name: 'bob')
@@ -25,7 +25,7 @@ RSpec.describe "AttendEvents", type: :system do
     expect(page).to have_current_path(user_path(@jen))
 
     expect(page.html).to match(
-      /.*<h2>All attended events<\/h2>.*#{@event.description}.*<h2>Past attended events<\/h2>.*/mi
+      %r{.*<h2>All attended events</h2>.*#{@event.description}.*<h2>Past attended events</h2>.*}mi
     )
 
     click_on('Logout')
@@ -37,7 +37,7 @@ RSpec.describe "AttendEvents", type: :system do
     expect(page).to have_current_path(user_path(@stu))
 
     expect(page.html).to match(
-      /.*<h2>All attended events<\/h2>.*#{@event.description}.*<h2>Past attended events<\/h2>.*/mi
+      %r{.*<h2>All attended events</h2>.*#{@event.description}.*<h2>Past attended events</h2>.*}mi
     )
   end
 end

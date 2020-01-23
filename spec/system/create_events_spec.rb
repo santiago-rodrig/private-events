@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "CreateEvents", type: :system do
+RSpec.describe 'CreateEvents', type: :system do
   before do
     driven_by(:selenium_chrome)
     @user = User.create(name: 'bob')

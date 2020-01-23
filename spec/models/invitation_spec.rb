@@ -6,10 +6,12 @@ RSpec.describe Invitation, type: :model do
     @other_user = User.create(name: 'jen')
 
     @event = @other_user.events.create(
-      description: 'party')
+      description: 'party'
+    )
 
     @invitation = Invitation.create(
-      invited_id: @user.id, inviting_event_id: @event.id)
+      invited_id: @user.id, inviting_event_id: @event.id
+    )
   end
 
   it 'belongs to an invited' do
