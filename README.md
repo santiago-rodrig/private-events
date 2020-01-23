@@ -16,6 +16,7 @@ Here is a list of dependencies of this app.
 - `bundler` 2.0.2
 - `yarn` 1.19.2
 - `sqlite3` 3.27.2
+- `google-chrome` 79.0.3945.130 (version 79)
 
 ## Setup
 
@@ -33,7 +34,7 @@ rails db:migrate RAILS_ENV=test
 ## Test suite
 
 To run the tests that verify the proper behavior of the Rails app, run the
-following command. There are about **109 passing specs**, this should make you
+following command. There are about **119 passing specs**, this should make you
 stop worrying about a malfunction in the app.
 
 ```shell
