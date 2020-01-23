@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       @user.invite(user, @event)
     end
 
-    redirect_to user_url(@user)
+    redirect_to event_url(@event)
   end
 
   def attend

@@ -30,8 +30,8 @@ RSpec.describe UsersController, type: :controller do
       expect(@another_user.inviting_events.count).to eq(1)
     end
 
-    it 'redirects to show' do
-      expect(response).to redirect_to(user_url(@user))
+    it 'redirects to event show' do
+      expect(response).to redirect_to(event_url(@event))
     end
   end
 

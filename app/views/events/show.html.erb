@@ -22,7 +22,7 @@
     <%= hidden_field_tag :event_id, "#{@event.id}" %>
     <%= fields :invitation do |f| %>
       <div><%= f.label :users, 'Users to invite' %></div>
-      <div><%= f.text_field :users, placeholder: 'jen, bob, stuart' %></div>
+      <div><%= f.text_field :users, placeholder: 'jen, bob, stuart', id: 'invitation_users' %></div>
     <% end %>
     <%= submit_tag 'Invite' %>
   <% end %>

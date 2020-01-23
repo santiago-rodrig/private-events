@@ -36,7 +36,7 @@ group :test do
   gem 'capybara', '~> 2.13'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
 end
 
 group :development, :test do
