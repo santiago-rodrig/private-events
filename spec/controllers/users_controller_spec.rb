@@ -30,6 +30,21 @@ RSpec.describe UsersController, type: :controller do
       expect(@another_user.inviting_events.count).to eq(1)
     end
 
+    it 'does not invite unexisting users' do
+      post(
+        :invite,
+        params: {
+          id: @user.id,
+          event_id: @event.id,
+          invitation: {
+            users: 'harry'
+          }
+        }
+      )
+
+      expect(@event.inviteds.count).to eq(2)
+    end
+
     it 'redirects to event show' do
       expect(response).to redirect_to(event_url(@event))
     end
