@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
     inviteds.each do |invited|
       user = User.find_by(name: invited)
-      @user.invite(user, @event)
+      @user.invite(user, @event) if user
     end
 
     redirect_to event_url(@event)
